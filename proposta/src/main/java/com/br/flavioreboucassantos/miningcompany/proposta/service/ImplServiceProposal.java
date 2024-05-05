@@ -1,0 +1,56 @@
+package com.br.flavioreboucassantos.miningcompany.proposta.service;
+
+import com.br.flavioreboucassantos.miningcompany.proposta.dto.DtoProposalDetails;
+import com.br.flavioreboucassantos.miningcompany.proposta.entity.EntityProposal;
+import com.br.flavioreboucassantos.miningcompany.proposta.message.EventsKafka;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.PersistenceException;
+import jakarta.transaction.Transactional;
+
+@ApplicationScoped
+public final class ImplServiceProposal implements ServiceProposal {
+
+	private final EventsKafka eventsKafka;
+
+	@Inject
+	public ImplServiceProposal(final EventsKafka eventsKafka) {
+		this.eventsKafka = eventsKafka;
+	}
+
+	@Override
+	public DtoProposalDetails findDtoProposalDetails(final long idProposal) {
+		EntityProposal entityProposal = EntityProposal.findById(idProposal);
+		return (entityProposal == null) ? null : entityProposal.extractDtoDetails();
+	}
+
+	@Override
+	public DtoProposalDetails tryFindDtoProposalDetails(final long idProposal) {
+		return findDtoProposalDetails(idProposal);
+	}
+
+	@Transactional
+	public boolean tryCreateNewProposal(final EntityProposal entityProposal) {
+		try {
+			entityProposal.persist();
+		} catch (PersistenceException e) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public void createNewProposal(final DtoProposalDetails dtoProposalDetails) {
+		final EntityProposal entityProposal = new EntityProposal(dtoProposalDetails);
+		if (tryCreateNewProposal(entityProposal))
+			eventsKafka.sendNewKafkaEvent(entityProposal.extractDto());
+	}
+
+	@Override
+	@Transactional
+	public void removeProposal(final long idProposal) {
+		EntityProposal.deleteById(idProposal);
+	}
+
+}

@@ -1,0 +1,44 @@
+# AMBIENTE
+
+jdk 17+
+<quarkus.platform.version>3.10.0</quarkus.platform.version>
+
+Environment Variable:
+	QUARKUS_PROFILE=PROFILE_NAME
+	
+"A profile aware file is only loaded if the unprofiled application.properties is also available in the same location and the file extension matches between the files.
+This is required to keep a consistent loading order and pair all the resources together."
+	
+JUnit:
+	"src\test\resources\application.properties"
+	
+swagger-ui API:
+	http://localhost:8080/q/swagger-ui/
+
+
+# COMANDOS DEV
+
+./mvnw compile quarkus:dev
+./mvnw compile quarkus:dev -Dquarkus.profile=PROFILE_NAME
+
+./mvnw quarkus:list-extensions
+./mvnw quarkus:add-extension -Dextensions="hibernate-orm-panache,quarkus-jdbc-postgresql,quarkus-messaging-kafka"
+./mvnw quarkus:add-extension -Dextensions="quarkus-resteasy-client,quarkus-resteasy-client-jackson"
+./mvnw quarkus:add-extension -Dextensions="quarkus-quartz"
+
+# COMANDOS PROD
+
+./mvnw clean package -DskipTests ### Empacota para PRODUÇÃO sem incluir testes.
+
+java -jar .\target\quarkus-app\quarkus-run.jar ### Executa pacote de PRODUÇÃO.
+
+# DOCKER
+	Instruções: src\main\docker\Dockerfile.jvm
+	
+	Mude localhost para host.docker.internal - DNS disponível para que a aplicação acesse serviços no host.
+	
+	docker --help
+	
+	./mvnw clean package -DskipTests
+	docker build -f src/main/docker/Dockerfile.jvm -t quarkus/cotacao-jvm .
+	docker run -i --rm -p 8080:8080 quarkus/cotacao-jvm
