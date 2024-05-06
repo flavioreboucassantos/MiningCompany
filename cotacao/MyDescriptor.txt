@@ -1,0 +1,11 @@
+# COMANDOS DEV
+
+	mvnw quarkus:add-extension -Dextensions="hibernate-orm-panache,quarkus-jdbc-postgresql,quarkus-messaging-kafka"
+	mvnw quarkus:add-extension -Dextensions="quarkus-resteasy-client,quarkus-resteasy-client-jackson"
+	mvnw quarkus:add-extension -Dextensions="quarkus-quartz"
+
+# DOCKER
+
+	mvnw clean package -DskipTests
+	docker build -f src/main/docker/Dockerfile.jvm -t quarkus/cotacao-jvm .
+	docker run -i --rm -p 8080:8080 quarkus/cotacao-jvm

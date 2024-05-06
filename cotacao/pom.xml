@@ -37,7 +37,7 @@
 			<groupId>com.br.flavioreboucassantos.miningcompany</groupId>
 			<artifactId>sharedlibrary-all</artifactId>
 			<version>1.0</version>
-			<scope>system</scope>	
+			<scope>system</scope>
 			<systemPath>D:\BACKUP TECNOLOGIA\Cursos\MiningCompany\projetos\sharedlibrary-all\target\quarkus-app\app\sharedlibrary-all-1.0.jar</systemPath>
 		</dependency>
 
