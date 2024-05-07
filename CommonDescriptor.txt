@@ -25,6 +25,45 @@
 
 	mvnw clean package -DskipTests ### Empacota para PROD sem incluir testes.
 	java -jar target\quarkus-app\quarkus-run.jar ### Executa pacote de PRODUÇÃO.
+	
+# COMANDOS KEYCLOAK	
+		
+	# Creating an optimized Keycloak build
+	
+		"If you run a build before the startup, only a subset of options is available to the build command.
+		The restriction is due to the build options getting persisted into an optimized Keycloak image."
+	
+		kc build --help
+		
+		# Set the build option for the PostgreSQL database vendor using the build command		
+			kc build --db=postgres
+			
+	# Set the runtime configuration options for postgres in the conf/keycloak.conf file.
+	
+		db=postgres
+		db-username=postgres
+		db-password=postgres
+		db-url=jdbc:postgresql://localhost:5432/keycloak
+		health-enabled=true
+		metrics-enabled=true
+		#https-certificate-file=${kc.home.dir}conf/server.crt.pem
+		#https-certificate-key-file=${kc.home.dir}conf/server.key.pem
+		#proxy=reencrypt
+		#spi-sticky-session-encoder-infinispan-should-attach-route=false
+		hostname=localhost
+		
+	# Start the server with the optimized parameter.
+	
+		# Creating the initial admin user
+	
+			"You can create the initial admin user by using the web frontend, which you access using a local connection (localhost).
+			You can instead create this user by using environment variables. Set KEYCLOAK_ADMIN=<username> for the initial admin username and KEYCLOAK_ADMIN_PASSWORD=<password> for the initial admin password."
+			
+			set KEYCLOAK_ADMIN=admin
+			set KEYCLOAK_ADMIN_PASSWORD=admin	
+	
+		kc start-dev
+		kc start --optimized # Please configure your keys/certificates or start the server in development mode.
 
 # DOCKER
 
