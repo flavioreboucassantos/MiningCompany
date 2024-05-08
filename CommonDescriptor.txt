@@ -24,6 +24,7 @@
 # COMANDOS PROD
 
 	mvnw clean package -DskipTests ### Empacota para PROD sem incluir testes.
+	mvn clean package -DskipTests
 	java -jar target\quarkus-app\quarkus-run.jar ### Executa pacote de PRODUÇÃO.
 	
 # COMANDOS KEYCLOAK	
@@ -46,6 +47,7 @@
 		db-url=jdbc:postgresql://localhost:5432/keycloak
 		health-enabled=true
 		metrics-enabled=true
+		http-port=7180
 		#https-certificate-file=${kc.home.dir}conf/server.crt.pem
 		#https-certificate-key-file=${kc.home.dir}conf/server.key.pem
 		#proxy=reencrypt

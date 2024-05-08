@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.br.flavioreboucassantos.miningcompany.proposta.dto.DtoProposalDetails;
 import com.br.flavioreboucassantos.miningcompany.proposta.service.ServiceProposal;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -42,6 +43,7 @@ public final class ControllerProposal {
 	}
 
 	@POST
+	@RolesAllowed("manager")
 	public Response createProposal(DtoProposalDetails dtoProposalDetails) {
 
 		LOG.info("--- Recebendo Proposta de Compra ---");
