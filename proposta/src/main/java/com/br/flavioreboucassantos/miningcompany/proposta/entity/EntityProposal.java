@@ -47,12 +47,11 @@ public class EntityProposal extends PanacheEntityBase {
 	}
 
 	public EntityProposal(final DtoProposalDetails dtoProposalDetails) {
-//		customer = dtoProposalDetails.customer();
-//		priceTonne = dtoProposalDetails.priceTonne();
-//		tonnes = dtoProposalDetails.tonnes();
-//		country = dtoProposalDetails.country();
-//		proposalValidityDays = dtoProposalDetails.proposalValidityDays();
-		dtoProposalDetails(customer, priceTonne, tonnes, country, proposalValidityDays);
+		customer = dtoProposalDetails.customer();
+		priceTonne = dtoProposalDetails.priceTonne();
+		tonnes = dtoProposalDetails.tonnes();
+		country = dtoProposalDetails.country();
+		proposalValidityDays = dtoProposalDetails.proposalValidityDays();
 		created = new Date();
 	}
 
