@@ -2,7 +2,7 @@
 
 	mvnw quarkus:add-extension -Dextensions="hibernate-orm-panache,jdbc-postgresql,resteasy-jackson"
 	mvnw quarkus:add-extension -Dextensions="quarkus-messaging-kafka"
-	mvnw quarkus:add-extension -Dextensions="quarkus-keycloak-authorization"	
+	mvnw quarkus:add-extension -Dextensions="quarkus-keycloak-authorization"		
 
 # DOCKER
 
