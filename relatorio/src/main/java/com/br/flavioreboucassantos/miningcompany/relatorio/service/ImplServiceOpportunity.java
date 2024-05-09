@@ -1,16 +1,14 @@
 package com.br.flavioreboucassantos.miningcompany.relatorio.service;
 
-import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.exception.ConstraintViolationException;
 
-import com.br.flavioreboucassantos.miningcompany.relatorio.dto.DtoOpportunity;
 import com.br.flavioreboucassantos.miningcompany.relatorio.entity.EntityOpportunity;
-import com.br.flavioreboucassantos.miningcompany.relatorio.utils.HelperCSV;
 import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.cotacao.entity.EntityQuotation;
+import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoOpportunity;
 import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoProposal;
 import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoQuotation;
 
@@ -65,10 +63,4 @@ public final class ImplServiceOpportunity implements ServiceOpportunity {
 
 		return listDtoOpportunity;
 	}
-
-	@Override
-	public ByteArrayInputStream generateCSVOpportunityReport() {
-		return HelperCSV.opportunitiesToCSV(findAll());
-	}
-
 }

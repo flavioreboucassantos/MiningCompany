@@ -1,10 +1,10 @@
-package com.br.flavioreboucassantos.miningcompany.proposta.controller;
+package com.br.flavioreboucassantos.miningcompany.gateway_bff.controller;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.br.flavioreboucassantos.miningcompany.proposta.service.ServiceProposal;
+import com.br.flavioreboucassantos.miningcompany.gateway_bff.service.ServiceProposal;
 import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoProposalDetails;
 
 import io.quarkus.security.Authenticated;
@@ -39,13 +39,9 @@ public final class ControllerProposal {
 
 	@GET
 	@Path("/{id}")
-	@RolesAllowed({"user", "manager"})
+	@RolesAllowed({ "user", "manager" })
 	public Response findProposalDetails(final @PathParam("id") long idProposal) {
-		DtoProposalDetails dtoProposalDetails;
-		if ((dtoProposalDetails = serviceProposal.tryFindDtoProposalDetails(idProposal)) == null)
-			return serviceProposal.disappointedFind().entity("findProposalDetails-id-NOT_FOUND").build();
-
-		return Response.ok(dtoProposalDetails).build();
+		return Response.ok(serviceProposal.getDtoProposalDetailsById(idProposal)).build();
 	}
 
 	@POST
@@ -54,9 +50,12 @@ public final class ControllerProposal {
 
 		LOG.info("--- Recebendo Proposta de Compra ---");
 
-		serviceProposal.createProposal(dtoProposalDetails);
+		final int statusResponse = serviceProposal.createProposal(dtoProposalDetails).getStatus();
 
-		return Response.ok().build();
+		if (statusResponse > 199 || statusResponse < 205)
+			return Response.ok().build();
+		else
+			return Response.status(statusResponse).build();
 	}
 
 	@DELETE
@@ -66,9 +65,12 @@ public final class ControllerProposal {
 
 		LOG.info("--- Removendo Proposta de Compra ---");
 
-		serviceProposal.removeProposal(idProposal);
+		final int statusResponse = serviceProposal.removeProposal(idProposal).getStatus();
 
-		return Response.ok().build();
+		if (statusResponse > 199 || statusResponse < 205)
+			return Response.ok().build();
+		else
+			return Response.status(statusResponse).build();
 	}
 
 }

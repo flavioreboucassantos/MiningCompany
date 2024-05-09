@@ -17,14 +17,15 @@
 	
 # COMANDOS DEV
 
-	mvnw compile quarkus:dev
-	mvnw compile quarkus:dev -Dquarkus.profile=PROFILE_NAME
 	mvnw quarkus:list-extensions
+	mvnw clean compile quarkus:dev
+	mvnw clean compile quarkus:dev -Dquarkus.profile=PROFILE_NAME	
 
 # COMANDOS PROD
 
-	mvnw clean package -DskipTests ### Empacota para PROD sem incluir testes.
+	"Empacota sem testes."
 	mvn clean package -DskipTests
+	mvnw clean package -DskipTests
 	java -jar target\quarkus-app\quarkus-run.jar ### Executa pacote de PRODUÇÃO.
 	
 # COMANDOS KEYCLOAK	

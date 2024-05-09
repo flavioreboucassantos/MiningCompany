@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 
-import com.br.flavioreboucassantos.miningcompany.proposta.dto.DtoProposalDetails;
 import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoProposal;
+import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoProposalDetails;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Column;

@@ -1,9 +1,11 @@
 package com.br.flavioreboucassantos.miningcompany.relatorio.controller;
 
-import java.util.Date;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import com.br.flavioreboucassantos.miningcompany.relatorio.service.ServiceOpportunity;
 
+import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -15,23 +17,23 @@ import jakarta.ws.rs.core.Response;
 @Path("/api/opportunity")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Authenticated
 public final class ControllerOpportunity {
 
 	private final ServiceOpportunity serviceOpportunity;
+	private final JsonWebToken jsonWebToken;
 
 	@Inject
-	public ControllerOpportunity(final ServiceOpportunity serviceOpportunity) {
+	public ControllerOpportunity(final ServiceOpportunity serviceOpportunity, final JsonWebToken jsonWebToken) {
 		this.serviceOpportunity = serviceOpportunity;
+		this.jsonWebToken = jsonWebToken;
 	}
 
 	@GET
-	@Path("/report")
-	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public Response generateReport() {
-		return Response
-				.ok(serviceOpportunity.generateCSVOpportunityReport(), MediaType.APPLICATION_OCTET_STREAM)
-				.header("content-disposition", "attachment; filename = " + new Date() + "--oportunidades-venda.csv")
-				.build();
+	@Path("/list")
+	@RolesAllowed({ "user", "manager" })
+	public Response listAll() {
+		return Response.ok().entity(serviceOpportunity.findAll()).build();
 	}
 
 }

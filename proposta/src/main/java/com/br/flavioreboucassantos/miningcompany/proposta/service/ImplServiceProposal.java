@@ -1,8 +1,8 @@
 package com.br.flavioreboucassantos.miningcompany.proposta.service;
 
-import com.br.flavioreboucassantos.miningcompany.proposta.dto.DtoProposalDetails;
 import com.br.flavioreboucassantos.miningcompany.proposta.entity.EntityProposal;
 import com.br.flavioreboucassantos.miningcompany.proposta.message.EventsKafka;
+import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoProposalDetails;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -31,7 +31,7 @@ public final class ImplServiceProposal implements ServiceProposal {
 	}
 
 	@Transactional
-	public boolean tryCreateNewProposal(final EntityProposal entityProposal) {
+	public boolean tryCreateProposal(final EntityProposal entityProposal) {
 		try {
 			entityProposal.persist();
 		} catch (PersistenceException e) {
@@ -41,9 +41,9 @@ public final class ImplServiceProposal implements ServiceProposal {
 	}
 
 	@Override
-	public void createNewProposal(final DtoProposalDetails dtoProposalDetails) {
+	public void createProposal(final DtoProposalDetails dtoProposalDetails) {
 		final EntityProposal entityProposal = new EntityProposal(dtoProposalDetails);
-		if (tryCreateNewProposal(entityProposal))
+		if (tryCreateProposal(entityProposal))
 			eventsKafka.sendNewKafkaEvent(entityProposal.extractDto());
 	}
 

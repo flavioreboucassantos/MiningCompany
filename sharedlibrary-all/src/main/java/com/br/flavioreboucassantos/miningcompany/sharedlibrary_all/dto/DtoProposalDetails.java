@@ -1,4 +1,4 @@
-package com.br.flavioreboucassantos.miningcompany.proposta.dto;
+package com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto;
 
 import java.math.BigDecimal;
 

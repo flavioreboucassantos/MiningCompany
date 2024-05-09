@@ -1,4 +1,4 @@
-package com.br.flavioreboucassantos.miningcompany.relatorio.utils;
+package com.br.flavioreboucassantos.miningcompany.gateway_bff.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,12 +10,19 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
-import com.br.flavioreboucassantos.miningcompany.relatorio.dto.DtoOpportunity;
+import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoOpportunity;
+import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.service.ServiceBase;
 
-public final class HelperCSV {
+import jakarta.enterprise.context.ApplicationScoped;
 
-	static final public ByteArrayInputStream opportunitiesToCSV(List<DtoOpportunity> opportunities) {
+@ApplicationScoped
+public interface ServiceReport extends ServiceBase {
+	
+	List<DtoOpportunity> findAll();
 
+	ByteArrayInputStream generateCSVOpportunityReport();
+
+	default ByteArrayInputStream opportunitiesToCSV(List<DtoOpportunity> listDtoOpportunity) {
 		final CSVFormat format = CSVFormat.DEFAULT
 				.builder()
 				.setHeader(
@@ -25,7 +32,7 @@ public final class HelperCSV {
 		try (ByteArrayOutputStream out = new ByteArrayOutputStream();
 				CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
 
-			for (DtoOpportunity dtoOpportunity : opportunities) {
+			for (DtoOpportunity dtoOpportunity : listDtoOpportunity) {
 				List<String> data = Arrays
 						.asList(
 								String.valueOf(dtoOpportunity.idProposal()), dtoOpportunity.customer(),
