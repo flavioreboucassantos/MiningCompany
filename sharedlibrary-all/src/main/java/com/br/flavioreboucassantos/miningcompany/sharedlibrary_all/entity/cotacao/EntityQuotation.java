@@ -1,4 +1,4 @@
-package com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.cotacao.entity;
+package com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.entity.cotacao;
 
 import java.math.BigDecimal;
 import java.util.Objects;

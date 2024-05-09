@@ -20,7 +20,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/api/proposal")
+@Path("/gateway/proposal")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Authenticated
@@ -46,7 +46,7 @@ public final class ControllerProposal {
 
 	@POST
 	@RolesAllowed("proposal-customer")
-	public Response createProposal(DtoProposalDetails dtoProposalDetails) {
+	public Response createProposal(final DtoProposalDetails dtoProposalDetails) {
 
 		LOG.info("--- Recebendo Proposta de Compra ---");
 

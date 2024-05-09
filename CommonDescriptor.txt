@@ -46,14 +46,19 @@
 		db-username=postgres
 		db-password=postgres
 		db-url=jdbc:postgresql://localhost:5432/keycloak
+
 		health-enabled=true
 		metrics-enabled=true
+
 		http-port=7180
 		#https-certificate-file=${kc.home.dir}conf/server.crt.pem
 		#https-certificate-key-file=${kc.home.dir}conf/server.key.pem
 		#proxy=reencrypt
 		#spi-sticky-session-encoder-infinispan-should-attach-route=false
+
 		hostname=localhost
+
+		log-level=INFO
 		
 	# Start the server with the optimized parameter.
 	
@@ -67,6 +72,9 @@
 	
 		kc start-dev
 		kc start --optimized # Please configure your keys/certificates or start the server in development mode.
+		
+	# Provider Metadata
+		http://localhost:7180/realms/quarkus/.well-known/openid-configuration
 
 # DOCKER
 

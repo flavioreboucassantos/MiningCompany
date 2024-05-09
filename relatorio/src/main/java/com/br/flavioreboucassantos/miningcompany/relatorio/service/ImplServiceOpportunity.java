@@ -7,10 +7,10 @@ import java.util.List;
 import org.hibernate.exception.ConstraintViolationException;
 
 import com.br.flavioreboucassantos.miningcompany.relatorio.entity.EntityOpportunity;
-import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.cotacao.entity.EntityQuotation;
 import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoOpportunity;
 import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoProposal;
 import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoQuotation;
+import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.entity.cotacao.EntityQuotation;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.control.ActivateRequestContext;

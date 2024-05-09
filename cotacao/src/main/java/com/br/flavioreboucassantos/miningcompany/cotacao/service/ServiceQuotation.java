@@ -8,8 +8,8 @@ import com.br.flavioreboucassantos.miningcompany.cotacao.client.ClientCurrencyPr
 import com.br.flavioreboucassantos.miningcompany.cotacao.dto.DtoCurrencyPrice;
 import com.br.flavioreboucassantos.miningcompany.cotacao.dto.DtoUsdBrl;
 import com.br.flavioreboucassantos.miningcompany.cotacao.message.EventsKafka;
-import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.cotacao.entity.EntityQuotation;
 import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.dto.DtoQuotation;
+import com.br.flavioreboucassantos.miningcompany.sharedlibrary_all.entity.cotacao.EntityQuotation;
 
 import io.quarkus.scheduler.Scheduled;
 import jakarta.enterprise.context.ApplicationScoped;

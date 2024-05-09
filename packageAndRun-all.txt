@@ -1,0 +1,22 @@
+# sharedlibrary-all
+	mvn clean package -DskipTests -f sharedlibrary-all
+
+# cotacao
+
+	mvn clean package -DskipTests -f cotacao
+	java -jar cotacao\target\quarkus-app\quarkus-run.jar
+
+# proposta
+
+	mvn clean package -DskipTests -f proposta
+	java -jar proposta\target\quarkus-app\quarkus-run.jar
+
+# relatorio
+
+	mvn clean package -DskipTests -f relatorio
+	java -jar relatorio\target\quarkus-app\quarkus-run.jar
+
+# gateway-bff
+
+	mvn clean package -DskipTests -f gateway-bff
+	java -jar gateway-bff\target\quarkus-app\quarkus-run.jar

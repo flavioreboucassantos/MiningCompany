@@ -50,7 +50,7 @@ public final class ControllerProposal {
 
 	@POST
 	@RolesAllowed("proposal-customer")
-	public Response createProposal(DtoProposalDetails dtoProposalDetails) {
+	public Response createProposal(final DtoProposalDetails dtoProposalDetails) {
 
 		LOG.info("--- Recebendo Proposta de Compra ---");
 
